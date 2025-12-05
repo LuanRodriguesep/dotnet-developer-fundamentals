@@ -55,7 +55,7 @@ namespace Calculator
 
             Console.WriteLine($"O resultado da soma é: {result}");
 
-            Console.Read();
+            Console.ReadKey();
 
             Menu();
         }
@@ -78,7 +78,7 @@ namespace Calculator
 
             Console.WriteLine($"O resultado da subtração é: {result}");
 
-            Console.Read();
+            Console.ReadKey();
 
             Menu();
         }
@@ -101,7 +101,7 @@ namespace Calculator
 
             Console.WriteLine($"O resultado da multiplicação é: {result}");
 
-            Console.Read();
+            Console.ReadKey();
 
             Menu();
         }
@@ -124,7 +124,7 @@ namespace Calculator
 
             Console.WriteLine($"O resultado da divisão é: {result}");
 
-            Console.Read();
+            Console.ReadKey();
 
             Menu();
         }
