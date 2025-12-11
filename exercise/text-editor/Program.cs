@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace TextEditor
 {
@@ -17,19 +18,34 @@ namespace TextEditor
             Console.WriteLine("2 - Criar novo arquivo");
             Console.WriteLine("0 - Sair");
 
-            short options = short.Parse(Console.ReadLine());
+            short options = short.Parse(Console.ReadLine() ?? "0");
 
             switch (options)
             {
-                case 0 :  System.Environment.Exit(0); break;
-                case 1 : Open(); break;
-                case 2 : Edit(); break;
+                case 0: System.Environment.Exit(0); break;
+                case 1: Open(); break;
+                case 2: Edit(); break;
                 default: Menu(); break;
             }
 
             static void Open()
             {
-                
+                Console.Clear();
+                Console.WriteLine("Qual caminho do arquivo ?");
+
+                var path = Console.ReadLine();
+
+                path = path ?? "";
+
+                using (var file = new StreamReader(path))
+                {
+                    string text =  file.ReadToEnd();
+                    Console.WriteLine(text);
+                }
+
+                Console.WriteLine("");
+                Console.ReadLine();
+                Menu();
             }
             static void Edit()
             {
@@ -45,9 +61,10 @@ namespace TextEditor
                     text += Environment.NewLine;
                 }
 
-                while(Console.ReadKey().Key != ConsoleKey.Escape);
+                while (Console.ReadKey().Key != ConsoleKey.Escape);
 
-                Console.Write(text);
+
+                Save(text);
             }
 
             static void Save(string text)
@@ -55,12 +72,18 @@ namespace TextEditor
                 Console.Clear();
                 Console.WriteLine("Qual caminho para salvar ?");
 
-                var path =  Console.ReadLine();
+                var path = Console.ReadLine();
 
-                using (var file =  new StreamWriter(path))
+                path = path ?? "";
+
+                using (var file = new StreamWriter(path))
                 {
                     file.Write(text);
                 }
+
+                Console.WriteLine($"O arquivo {path} foi salvo com sucesso");
+                Console.ReadLine();
+                Menu();
             }
         }
     }
